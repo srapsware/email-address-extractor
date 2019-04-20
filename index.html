@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Email Address Extractor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Email Address Extractor">
+    <meta name="author" content="Shiv Singh">
+    <!-- Le styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.css" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="./js/core.js"></script>
+</head>
+
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="https://github.com/shivsingh7150/Email-Address-Extractor">Email Address Extractor</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="https://github.com/shivsingh7150/Email-Address-Extractor">Home</a></li>
+                        <li><a href="https://github.com/shivsingh7150/Email-Address-Extractor">About</a></li>
+                        <li><a href="https://github.com/shivsingh7150/Email-Address-Extractor">Help</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="start_main">
+
+            <div class="example">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <h4>Email Address Extractor</h4>
+                        <p>Enter any text data that contain email addresses </p>
+                    </div>
+                    <form name="extractor" action="#" method="get">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-md-6">
+                                <textarea class="form-control" rows="10" placeholder="Enter your text here" name="input"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <textarea class="form-control" rows="10" placeholder="The result will show here" name="output" id="output" readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-md-3">
+                                <label class="control-label"> <a href="#" onClick="help();"><em>Need help?</em></a></label>
+                                <input type="button" class="btn btn-info btn-block" value="Extract" onClick="findEmail();">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label">&nbsp;</label>
+                                <button type="reset" class="btn btn-danger btn-block">Reset</button>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label">Number of addresses detected:</label>
+                                <input name="count" size="5" readonly="readonly" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label" id="copydone">&nbsp;</label>
+                                <button type="button" class="btn btn-success btn-block" onClick="copymails()">Copy Mails</button>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                            <h4>Output Option</h4>
+                            <p>Data output control for refining much better</p>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="control-label">Separator:</label>
+                                    <select name="sep" class="form-control">
+                                        <option value="new" selected="selected">New Line</option>
+                                        <option value=", ">Comma</option>
+                                        <option value="|">Pipe</option>
+                                        <option value=" : ">Colon</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">&nbsp;</label>
+                                    <input type="text" name="othersep" placeholder="Other Separator" class="form-control" size="3" onBlur="checksep(this.value);">
+                                </div>
+                                <div class="col-md-2 col-sm-6 col-md-6">
+                                    <label for="flat-checkbox-1">Sort Alphabetically</label>
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="sort" class="form-control" id="sortbox">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                    <label class="control-label">To Lowercase?</label>
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="lowcase" class="form-control" id="casebox" checked="checked">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label">Group:</label>
+                                    <input type="text" size="3" placeholder="Ex. 50" name="groupby" class="form-control" onBlur="numonly(this.value);"> Addresses <small>(groups will be seperated by new paragraph)</small> </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                            <h4>Filter Option</h4>
+                            <p>More Options</p>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="control-label">Type of address to extract:</label>
+                                    <select name="address_type" class="form-control" onchange="ChangedAddressType()">
+                                        <option value="email" selected="selected">Email</option>
+                                        <option value="web">URL</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">&nbsp;</label>
+                                    <select name="filter_type" class="form-control">
+                                        <option value="1" selected="selected">Only</option>
+                                        <option value="0">Do not</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-7">
+                                    <label class="control-label">Extract address containing this string:</label>
+                                    <textarea name="string" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12" id="ForMail">
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                                    <h4>Extra Filter</h4>
+                                    <p>Proxy data removal</p>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                    <label for="flat-checkbox-1">Use keyword fitter</label>
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="UseKeyword" class="form-control" id="UseKeyword">
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-sm-6">
+                                    <label class="control-label">Remove containing keywords address:</label>
+                                    <textarea name="RemoveKeywords" class="form-control">whois,domain,dns,proxy,priv,regi,webmaster,protc,obsc,anonymiz,@contac,163.com,139.com,host,gandi,support,126.com,qq.com,naver.com,hxmail.com,pro.net,xell.hk,corp.com</textarea>
+                                    <small>You can remove existing keywords or add new keyword separating by comma.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="seprater_new"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <header class="section-heading text-center">
+                    <h2 class="title-text">Email Address Extractor</h2>
+                    <p class="sub-title">Extract email addresses from any text with this free utility. Simply copy, paste and start extracting.</p>
+                </header>
+            </div>
+        </div>
+    </div>
+    <div class="content-section-a">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading payment">No duplicates</h2>
+                    <p class="lead payment_dec">This tool extract email address<strong> without repeating</strong> the same email, <strong>100% no duplication</strong></p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6"> <i class="fa fa-files-o payment_image"></i> </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <div class="content-section-b">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading payment">Counts of emails</h2>
+                    <p class="lead payment_dec">After email address extraction, it shows <strong>how many</strong> clean exacted email address founded.</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6"> <i class="fa fa-list-ol payment_image"></i> </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <div class="content-section-c">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading payment">Different separator</h2>
+                    <p class="lead payment_dec">This tool offer you to use many separators as <strong>comma, pipe, colon, space, etc</strong>. even we have a powerful option here you can use your own separator.</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6"> <i class="fa fa-arrows-alt payment_image"></i> </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <div class="content-section-d">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading payment">Generates in groups</h2>
+                    <p class="lead payment_dec">Group emails by number specified by you. <strong>Each group</strong> is separated by new line.</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6"> <i class="fa fa-object-group payment_image"></i> </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <div class="content-section-e">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading payment">Sort emails alphabetically</h2>
+                    <p class="lead payment_dec">This also sort emails in alphabetically, this is the option tool, if you want to see it then kindly find <strong>Sort Alphabetically</strong> checkbox.</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6"> <i class="fa fa-sort-alpha-asc payment_image"></i> </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <div class="content-section-f">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading payment">Certain string and much more</h2>
+                    <p class="lead payment_dec">Option to extract or exclude email containing only <strong>certain string</strong>. Option to extract <strong>web addresses</strong> instead of email addresses.</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6"> <i class="fa fa-hashtag payment_image"></i> </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+
+
+
+</body>
+
+</html>
