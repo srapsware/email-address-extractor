@@ -2,8 +2,7 @@
 Email Address Extractor from raw text with advance group filter options.
 
 # Demo:
-See working demo here: https://www.whoisextractor.in/email-address-extractor/
-
+See working demo here: https://email-extractor.whoisextractor.in/
 # No duplicates
 This tool extract email address without repeating the same email, 100% no duplication
 
