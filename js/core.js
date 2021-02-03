@@ -94,7 +94,11 @@ function findEmail() {
     if (address_type == "web") {
         rawemail = input.match(/([A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_%&\?\/.=]+)/gi);
     } else {
-        rawemail = input.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+		if (document.extractor.RemoveNumeric.checked) {
+        rawemail = input.match(/([a-zA-Z0-9._-]+@[a-zA-Z._-]+\.[a-zA-Z0-9._-]+)/gi);
+		}else{
+		rawemail = input.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);	
+		}
         /////console.log(rawemail);
     }
 
